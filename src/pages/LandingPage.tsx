@@ -33,7 +33,7 @@ const LandingPage = () => {
           <Header onLoginClick={handleCTA} />
 
           {/* Hero Content  */}
-          <div className="flex flex-col md:flex-row items-center">
+          <div className="flex flex-col md:flex-row xl:pl-[7vw] items-center">
             <div className="w-full md:w-1/2 pr-4 mb-8 md:mb-0">
               <div className="flex items-center justify-start mb-2">
                 <div className="flex items-center gap-2 text-[13px] text-amber-600 font-semibold bg-amber-100 px-3 py-1 rounded-full border border-amber-300">
@@ -91,7 +91,7 @@ const LandingPage = () => {
                 </h2>
               </div>
 
-              <div className="flex flex-col items-center gap-8">
+              <div className="flex flex-col items-center gap-8 xl:px-20">
                 {/* First 3 cards */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                   {APP_FEATURES.slice(0, 3).map((feature) => (
