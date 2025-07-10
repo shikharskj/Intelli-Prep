@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 
 import Input from "../../components/Input";
+import { validateEmail } from "../../utils/helper";
 
 type LoginProps = {
   setCurrentPage: (currentPage: string) => void;
@@ -11,33 +12,49 @@ type LoginProps = {
 const Login = ({ setCurrentPage }: LoginProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
   };
   // console.log("email = ", email)
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    if(name === "email") {
+    if (name === "email") {
       setEmail(value);
     } else {
       setPassword(value);
     }
-  }
+  };
 
   const goToSignUp = () => {
-      setCurrentPage("signup");
-  }
+    setCurrentPage("signup");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("submit called")
-  }
 
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    } else if (!password) {
+      setError("Please enter the password");
+      return;
+    }
+    setError("");
+
+    // Login api call
+    try {
+    } catch (error) {
+      if (error?.response && error?.response?.data?.message) {
+        setError(error?.response?.data?.message);
+      } else {
+        setError("Something went wrong! Please try again.");
+      }
+    }
+  };
 
   return (
     <div className="w-[90vw] md:w-[33vw] p-7 flex flex-col justify-center">
